@@ -7,7 +7,6 @@ import { useAuthContext } from "../../hooks/useAuthContext.js";
 import Avatar from "../Avatar/Avatar.js";
 export default function Sidebar() {
   const { user } = useAuthContext();
-  console.log(user.photoURL);
   return (
     <div className="sidebar">
       <div className="sidebar-content">
