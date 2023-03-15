@@ -13,6 +13,7 @@ import Create from "./pages/create/Create.js";
 import Project from "./pages/project/Project.js";
 import Navbar from "./components/navbar/Navbar.js";
 import Sidebar from "./components/sidebar/Sidebar.js";
+import OnlineUser from "./components/onlineUsers/OnlineUser.js";
 import { useAuthContext } from "./hooks/useAuthContext.js";
 function App() {
   const { user, authIsReady } = useAuthContext();
@@ -48,6 +49,7 @@ function App() {
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </div>
+          {user && <OnlineUser />}
         </Router>
       )}
     </div>
