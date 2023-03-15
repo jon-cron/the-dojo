@@ -2,6 +2,7 @@ import React from "react";
 import "./Project.css";
 import { useDocument } from "../../hooks/useDocument.js";
 import { useParams } from "react-router-dom";
+import ProjectSummary from "./ProjectSummary.js";
 export default function Project() {
   const { id } = useParams();
   const { document, error } = useDocument("projects", id);
@@ -18,7 +19,7 @@ export default function Project() {
   return (
     <div className="project-details">
       {error && <div className="error">{error}</div>}
-      {document && <h1>{document.name}</h1>}
+      {document && <ProjectSummary project={document} />}
     </div>
   );
 }
