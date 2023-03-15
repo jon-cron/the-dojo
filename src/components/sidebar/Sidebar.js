@@ -14,7 +14,7 @@ export default function Sidebar() {
           <ul>
             <li>
               {/* NOTE NavLinks have an active effect when selected. We can use that effect to style them differently */}
-              <NavLink exact to="/">
+              <NavLink to="/">
                 <img src={DashboardIcon} alt="dashboard" />
                 <span>Dashboard</span>
               </NavLink>
