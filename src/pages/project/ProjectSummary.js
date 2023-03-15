@@ -11,11 +11,13 @@ export default function ProjectSummary({ project }) {
         <p className="details">{project.details}</p>
       </div>
       <h4>Project is assigned to:</h4>
-      {project.assignedUsersList.map((u) => (
-        <div key={u.id}>
-          <Avatar src={u.photoURL} />
-        </div>
-      ))}
+      <div className="assigned-users">
+        {project.assignedUsersList.map((u) => (
+          <div key={u.id}>
+            <Avatar src={u.photoURL} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

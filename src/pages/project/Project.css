@@ -28,6 +28,8 @@
 }
 .project-summary .assigned-users {
   display: flex;
+  justify-content: center;
+  text-align: center;
   margin-top: 20px;
 }
 .project-summary .assigned-users .avatar {
