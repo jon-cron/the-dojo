@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Create.css";
 // NOTE to use Select you must run "npm install react-select" then import the Select
 import Select from "react-select";
+import { useCollection } from "../../hooks/useCollection.js";
 
 const categories = [
   { value: "development", label: "Development" },
@@ -10,14 +11,37 @@ const categories = [
   { value: "marketing", label: "Marketing" },
 ];
 export default function Create() {
+  const { documents } = useCollection("users");
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    // NOTE upon page load documents will be null but when that changes we will rerun this function and set our users to the select in the form
+    if (documents) {
+      const options = documents.map((user) => {
+        return { value: user, label: user.displayName };
+      });
+      setUsers(options);
+    }
+  }, [documents]);
+
   const [name, setName] = useState("");
   const [details, setDetails] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [category, setCategory] = useState("");
   const [assignedUsers, setAssignedUsers] = useState([]);
+  const [formError, setFormError] = useState(null);
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(name, details, dueDate, category.value);
+    setFormError(null);
+    if (!category) {
+      setFormError("Please select category");
+      return;
+    }
+    if (assignedUsers.length < 1) {
+      setFormError("Please assign users");
+      return;
+    }
+    console.log(name, details, dueDate, category.value, assignedUsers);
   };
   return (
     <div className="create-form">
@@ -59,8 +83,15 @@ export default function Create() {
         </label>
         <label>
           <span>Assign to:</span>
+          <Select
+            options={users}
+            onChange={(option) => setAssignedUsers(option)}
+            // NOTE isMulti allows the user to select multiple options
+            isMulti
+          />
         </label>
         <button className="btn">Submit</button>
+        {formError && <div className="error">{formError}</div>}
       </form>
     </div>
   );
