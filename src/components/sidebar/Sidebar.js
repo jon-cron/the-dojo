@@ -13,7 +13,8 @@ export default function Sidebar() {
         <nav className="links">
           <ul>
             <li>
-              <NavLink to="/">
+              {/* NOTE NavLinks have an active effect when selected. We can use that effect to style them differently */}
+              <NavLink exact to="/">
                 <img src={DashboardIcon} alt="dashboard" />
                 <span>Dashboard</span>
               </NavLink>
