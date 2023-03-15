@@ -53,3 +53,13 @@
   height: 70px;
   border: 3px solid #fff;
 }
+.sidebar .profile-img {
+  height: 30px;
+  width: 30px;
+  object-fit: cover;
+}
+.sidebar p {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
