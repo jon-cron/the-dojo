@@ -12,10 +12,12 @@ import Signup from "./pages/signup/Signup.js";
 import Create from "./pages/create/Create.js";
 import Project from "./pages/project/Project.js";
 import Navbar from "./components/navbar/Navbar.js";
+import Sidebar from "./components/sidebar/Sidebar.js";
 function App() {
   return (
     <div className="App">
       <Router>
+        <Sidebar />
         <div className="container">
           <Navbar />
           <Routes>
