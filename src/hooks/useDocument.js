@@ -7,8 +7,21 @@ export const useDocument = (collection, id) => {
 
   useEffect(() => {
     const ref = projectFirestore.collection(collection).doc(id);
-    ref.onSnapshot((snapshot) => {
-      setDocument(snapshot);
-    });
+    const unsub = ref.onSnapshot(
+      (snapshot) => {
+        if (snapshot.data()) {
+          setDocument({ ...snapshot.data(), id: snapshot.id });
+          setError(null);
+        } else {
+          setError("NO document by that id");
+        }
+      },
+      (error) => {
+        console.log(error.message);
+        setError("Failed to get doc");
+      }
+    );
+    return () => unsub();
   }, [collection, id]);
+  return { document, error };
 };
