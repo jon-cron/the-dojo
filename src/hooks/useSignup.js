@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
-import { projectAuth, projectStorage } from "../firebase/config";
+import {
+  projectAuth,
+  projectStorage,
+  projectFirestore,
+} from "../firebase/config";
 import { useAuthContext } from "./useAuthContext";
 
 export const useSignup = () => {
@@ -31,6 +35,13 @@ export const useSignup = () => {
 
       // add display name to user
       await res.user.updateProfile({ displayName, photoURL: imgUrl });
+
+      // NOTE after we create a user, upload an image and update their profile with a displayName and photURL we want to also make them a document in the firestore so that we have access to some of their information to display for all users
+      // NOTE .add would auto generate a document id but if we instead use .doc(we can provide our own id here for the document) then we use .set(to put the information into that document)
+      await projectFirestore
+        .collection("users")
+        .doc(res.user.uid)
+        .set({ online: true, displayName, photoURL: imgUrl });
 
       // dispatch login action
       dispatch({ type: "LOGIN", payload: res.user });
