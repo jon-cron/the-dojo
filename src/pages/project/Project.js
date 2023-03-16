@@ -20,8 +20,12 @@ export default function Project() {
   return (
     <div className="project-details">
       {error && <div className="error">{error}</div>}
-      {document && <ProjectSummary project={document} />}
-      <ProjectComments project={document} />
+      {document && (
+        <>
+          <ProjectSummary project={document} />
+          <ProjectComments project={document} />
+        </>
+      )}
     </div>
   );
 }
