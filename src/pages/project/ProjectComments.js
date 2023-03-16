@@ -38,6 +38,7 @@ export default function ProjectComments({ project }) {
               <div className="comment-date">
                 {/* NOTE to reflect dates this way I used an external library. run "npm install date-fns" to do so */}
                 <p>
+                  {/* NOTE this function takes two arguments. The first is a date and the second is a format. addSuffix: true inserts words into the date "less than a minute ago" */}
                   {formatDistanceToNow(c.createdAt.toDate(), {
                     addSuffix: true,
                   })}
